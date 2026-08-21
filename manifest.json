@@ -1,0 +1,20 @@
+{
+  "name": "ObrasD'Elite - Orçamentos",
+  "short_name": "ObrasD'Elite",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "ícone-192 (1).png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ícone-512 (1).png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
