@@ -32,25 +32,27 @@ td input{padding:9px}.num{text-align:right}.totals{margin-left:auto;max-width:36
 .voice-status{font-size:12px;color:var(--ok);margin-top:8px;min-height:16px}.print-only{display:none}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.app{padding:10px}.logoBox{width:140px;height:108px}.brand h1{font-size:19px}.card{padding:16px;border-radius:22px}}
 @media print{
-  @page{size:A4;margin:14mm}
-  html,body{width:100%;background:#fff;overflow:visible!important}
-  .no-print{display:none!important}
-  .print-only{display:block!important}
-  .desc-edit{display:none!important}
-  .app{max-width:none!important;width:100%!important;padding:0!important;margin:0!important;overflow:visible!important}
-  .card{box-shadow:none!important;border-radius:0!important;margin:0 0 10px!important;padding:6px 0!important;overflow:visible!important;break-inside:avoid}
-  .card>div[style*="overflow-x:auto"]{overflow:visible!important}
-  table{width:100%!important;min-width:0!important;table-layout:fixed!important}
-  th,td{padding:6px 5px!important;font-size:10.5pt!important;vertical-align:top!important;overflow:visible!important}
-  th:nth-child(1),td:nth-child(1){width:42%!important}
-  th:nth-child(2),td:nth-child(2){width:10%!important}
-  th:nth-child(3),td:nth-child(3){width:10%!important}
-  th:nth-child(4),td:nth-child(4){width:18%!important}
-  th:nth-child(5),td:nth-child(5){width:20%!important;text-align:right!important}
-  input,textarea,select{border:0!important;padding:0!important;background:transparent!important;appearance:none!important;box-shadow:none!important}
-  td input{font-size:10.5pt!important;min-width:0!important;width:100%!important}
-  .desc-print{white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.35!important}
-  .logoBox{border:0!important}
+@page{size:A4 portrait;margin:12mm}
+html,body{margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important}
+.no-print{display:none!important}.print-only{display:block!important}.desc-edit{display:none!important}
+.app{width:100%!important;max-width:none!important;padding:0!important;margin:0!important;overflow:visible!important}
+header{display:flex!important;align-items:flex-start!important;width:100%!important;margin:0 0 12px!important;padding:0!important}
+header .logoBox{order:2!important;width:110px!important;height:68px!important;margin-left:auto!important;border:0!important;border-radius:0!important}
+header .logoBox img{width:100%!important;height:100%!important;object-fit:contain!important}
+header>div:not(.logoBox){order:1!important}
+.card{width:100%!important;box-sizing:border-box!important;box-shadow:none!important;border-radius:0!important;margin:0 0 10px!important;padding:5px 0!important;overflow:visible!important}
+.card>div[style*="overflow-x:auto"]{overflow:visible!important;width:100%!important}
+table{width:100%!important;max-width:100%!important;min-width:0!important;table-layout:fixed!important;border-collapse:collapse!important}
+th,td{box-sizing:border-box!important;padding:6px 3px!important;font-size:8.5pt!important;line-height:1.3!important;vertical-align:top!important;overflow:visible!important}
+th:nth-child(1),td:nth-child(1){width:40%!important;text-align:left!important}
+th:nth-child(2),td:nth-child(2){width:8%!important;text-align:center!important}
+th:nth-child(3),td:nth-child(3){width:8%!important;text-align:center!important}
+th:nth-child(4),td:nth-child(4){width:19%!important;text-align:right!important}
+th:nth-child(5),td:nth-child(5){width:25%!important;text-align:right!important}
+input,textarea,select{border:0!important;padding:0!important;background:transparent!important;appearance:none!important;box-shadow:none!important;max-width:100%!important}
+td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
+.desc-print{display:block!important;width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.35!important}
+.logoBox{border:0!important}
 }
 </style>
 </head>
