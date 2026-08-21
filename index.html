@@ -1,105 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ObrasD'Elite - Orçamentos</title>
-  <meta name="theme-color" content="#1f2f33">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
-  <link rel="manifest" href="./manifest.json">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f2f33">
+<title>ObrasD'Elite — Orçamentos</title>
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="manifest" href="./manifest.json">
 <style>
-  :root{
-    --bg:#f4f5f7;
-    --card:#ffffff;
-    --text:#1d1f23;
-    --muted:#6d737c;
-    --accent:#111827;
-    --line:#d9dde3;
-    --ok:#16794a;
-    --danger:#b42318;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-  }
-  .app{max-width:980px;margin:auto;padding:16px}
-  .topbar{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-    margin-bottom:16px;
-  }
-  .brand{display:flex;align-items:center;gap:12px}
-  .logoBox{
-    width:72px;height:72px;border:1px dashed var(--line);border-radius:14px;
-    display:grid;place-items:center;background:#fff;overflow:hidden;cursor:pointer;
-  }
-  .logoBox img{width:100%;height:100%;object-fit:contain}
-  .brand h1{margin:0;font-size:22px}
-  .brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
-  .card{
-    background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
-  }
-  h2{font-size:17px;margin:0 0 12px}
-  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
-  label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}
-  input, textarea, select{
-    width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;
-    font-size:15px;background:#fff;color:var(--text);
-  }
-  textarea{min-height:84px;resize:vertical}
-  button{
-    border:none;border-radius:10px;padding:11px 14px;font-size:14px;font-weight:700;
-    cursor:pointer;
-  }
-  .primary{background:var(--accent);color:#fff}
-  .secondary{background:#e9ebef;color:#222}
-  .danger{background:#fee4e2;color:var(--danger)}
-  .add{background:#e8f5ee;color:var(--ok)}
-  table{width:100%;border-collapse:collapse}
-  th,td{padding:9px 6px;border-bottom:1px solid #eceef1;text-align:left;font-size:13px}
-  th{color:var(--muted)}
-  td input{padding:8px}
-  .num{text-align:right}
-  .totals{margin-left:auto;max-width:350px}
-  .totals div{display:flex;justify-content:space-between;padding:6px 0}
-  .totals .grand{font-size:21px;font-weight:800;border-top:2px solid var(--text);margin-top:4px;padding-top:10px}
-  .actions{display:flex;flex-wrap:wrap;gap:8px}
-  .small{font-size:12px;color:var(--muted)}
-  .hidden{display:none}
-  @media(max-width:680px){
-    .grid,.grid3{grid-template-columns:1fr}
-    .topbar{align-items:flex-start}
-    .brand h1{font-size:18px}
-    table{display:block;overflow-x:auto;white-space:nowrap}
-    .app{padding:10px}
-  }
-  @media print{
-    body{background:white}
-    .no-print{display:none!important}
-    .card{box-shadow:none;border:0;padding:8px 0}
-    .app{max-width:none;padding:0}
-    input,textarea,select{border:0;padding:0;appearance:none}
-    .logoBox{border:0}
-  }
+:root{--bg:#f4f5f7;--card:#fff;--text:#1d1f23;--muted:#6d737c;--accent:#1f2f33;--line:#d9dde3;--ok:#16794a;--danger:#b42318;--soft:#e8f5ee}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:980px;margin:auto;padding:16px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}.brand h1{font-size:22px;margin:0}.brand p{margin:4px 0 0;color:var(--muted)}
+.logoBox{width:140px;height:110px;border:1px dashed var(--line);border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}
+.logoBox img{width:100%;height:100%;object-fit:contain}.hidden{display:none}
+.card{background:var(--card);border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+h2{font-size:19px;margin:0 0 16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px} input,textarea,select,button{font:inherit}
+input,textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--text);font-size:16px}
+textarea{min-height:100px;resize:vertical}.fieldrow{display:flex;gap:8px;align-items:stretch}.fieldrow input,.fieldrow textarea{flex:1}
+.mic{width:46px;min-width:46px;border-radius:12px;border:0;background:#eef1f4;font-size:20px}
+button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:#fff}.secondary{background:#e9ebef;color:#222}.danger{background:#fee4e2;color:var(--danger)}.add{background:var(--soft);color:var(--ok)}
+.actions{display:flex;flex-wrap:wrap;gap:9px}.small{font-size:12px;color:var(--muted)} table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:9px 6px;border-bottom:1px solid #eceef1;text-align:left;font-size:13px;vertical-align:middle} th{color:var(--muted)}
+td input{padding:9px}.num{text-align:right}.totals{margin-left:auto;max-width:360px}.totals div{display:flex;justify-content:space-between;padding:7px 0}
+.totals .grand{font-size:22px;font-weight:800;border-top:2px solid var(--text);margin-top:4px;padding-top:11px}
+.saved-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:12px 0}.saved-info{min-width:0}
+.saved-info strong{display:block}.saved-info span{font-size:12px;color:var(--muted)}.saved-actions{display:flex;gap:6px;flex-wrap:wrap}
+.saved-actions button{padding:8px 10px;font-size:12px}.badge{display:inline-block;background:#eef1f4;padding:4px 8px;border-radius:99px;font-size:11px;color:#444}
+.voice-status{font-size:12px;color:var(--ok);margin-top:8px;min-height:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.app{padding:10px}.logoBox{width:140px;height:108px}.brand h1{font-size:19px}.card{padding:16px;border-radius:22px}}
+@media print{body{background:#fff}.no-print{display:none!important}.app{max-width:none;padding:0}.card{box-shadow:none;border-radius:0;margin:0;padding:8px 0}input,textarea,select{border:0;padding:0;background:transparent;appearance:none}.logoBox{border:0}}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
     <div class="brand">
-      <label class="logoBox no-print" for="logoInput" title="Carregar logótipo">
-        <span id="logoPlaceholder">LOGO</span>
-        <img id="logoImg" class="hidden" alt="Logótipo">
-      </label>
-      <div class="logoBox" id="logoPrintBox" style="display:none">
-        <img id="logoPrintImg" class="hidden" alt="Logótipo">
-      </div>
+      <label class="logoBox no-print" for="logoInput" title="Alterar logótipo"><img id="logoImg" src="./icon-512.png" alt="ObrasD'Elite"></label>
       <div>
         <h1>ObrasD'Elite — Orçamento</h1>
         <p>Remodelações e Construção</p>
@@ -111,43 +50,20 @@
   <div class="card">
     <h2>Dados do orçamento</h2>
     <div class="grid">
-      <div>
-        <label>N.º do orçamento</label>
-        <input id="orcNumero" placeholder="Ex.: 2026-001">
-      </div>
-      <div>
-        <label>Data</label>
-        <input id="orcData" type="date">
-      </div>
-      <div>
-        <label>Cliente</label>
-        <input id="cliente" placeholder="Nome do cliente">
-      </div>
-      <div>
-        <label>Contacto</label>
-        <input id="contacto" placeholder="Telefone / email">
-      </div>
-      <div style="grid-column:1/-1">
-        <label>Morada / Local da obra</label>
-        <input id="morada" placeholder="Morada da obra">
-      </div>
+      <div><label>N.º do orçamento</label><input id="orcNumero" placeholder="Ex.: 2026-001"></div>
+      <div><label>Data</label><input id="orcData" type="date"></div>
+      <div><label>Cliente</label><div class="fieldrow"><input id="cliente" placeholder="Nome do cliente"><button class="mic no-print" onclick="ditar('cliente')" title="Ditar">🎤</button></div></div>
+      <div><label>Contacto</label><div class="fieldrow"><input id="contacto" placeholder="Telefone / email"><button class="mic no-print" onclick="ditar('contacto')" title="Ditar">🎤</button></div></div>
+      <div style="grid-column:1/-1"><label>Morada / Local da obra</label><div class="fieldrow"><input id="morada" placeholder="Morada da obra"><button class="mic no-print" onclick="ditar('morada')" title="Ditar">🎤</button></div></div>
     </div>
+    <div id="voiceStatus" class="voice-status no-print"></div>
   </div>
 
   <div class="card">
     <h2>Trabalhos</h2>
     <div style="overflow-x:auto">
       <table>
-        <thead>
-          <tr>
-            <th style="min-width:260px">Descrição</th>
-            <th>Qtd.</th>
-            <th>Un.</th>
-            <th>Preço unit.</th>
-            <th>Total</th>
-            <th class="no-print"></th>
-          </tr>
-        </thead>
+        <thead><tr><th style="min-width:300px">Descrição</th><th>Qtd.</th><th>Un.</th><th>Preço unit.</th><th>Total</th><th class="no-print"></th></tr></thead>
         <tbody id="items"></tbody>
       </table>
     </div>
@@ -158,158 +74,106 @@
     <div class="grid">
       <div>
         <h2>Observações</h2>
-        <textarea id="observacoes" placeholder="Ex.: materiais incluídos, condições de pagamento, prazo previsto..."></textarea>
+        <div class="fieldrow"><textarea id="observacoes" placeholder="Materiais incluídos, condições de pagamento, prazo previsto..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
       </div>
       <div>
         <h2>Totais</h2>
-        <div class="grid" style="grid-template-columns:1fr 1fr">
-          <div>
-            <label>IVA</label>
-            <select id="iva" onchange="calc()">
-              <option value="0">0%</option>
-              <option value="6">6%</option>
-              <option value="13">13%</option>
-              <option value="23" selected>23%</option>
-            </select>
-          </div>
-          <div>
-            <label>Desconto (€)</label>
-            <input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()">
-          </div>
+        <div class="grid">
+          <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
+          <div><label>Desconto (€)</label><input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()"></div>
         </div>
-        <div class="totals">
-          <div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div>
-          <div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div>
-          <div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div>
-          <div class="grand"><span>Total</span><span id="total">0,00 €</span></div>
-        </div>
+        <div class="totals"><div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div><div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div><div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div><div class="grand"><span>Total</span><span id="total">0,00 €</span></div></div>
       </div>
     </div>
   </div>
 
   <div class="card no-print">
+    <h2>Ações</h2>
     <div class="actions">
-      <button class="primary" onclick="window.print()">Guardar / Imprimir PDF</button>
-      <button class="secondary" onclick="guardar()">Guardar no telemóvel</button>
-      <button class="secondary" onclick="carregar()">Carregar último</button>
-      <button class="danger" onclick="limpar()">Novo orçamento</button>
+      <button class="primary" onclick="guardar()">💾 Guardar orçamento</button>
+      <button class="secondary" onclick="window.print()">📄 Guardar / Imprimir PDF</button>
+      <button class="secondary" onclick="partilharWhatsApp()">🟢 WhatsApp</button>
+      <button class="add" onclick="novo()">＋ Novo orçamento</button>
     </div>
-    <p class="small">Dica: no Android, ao escolher “Imprimir”, pode selecionar “Guardar como PDF”.</p>
+    <p class="small">No Android, em “Guardar / Imprimir PDF”, escolha “Guardar como PDF”.</p>
+  </div>
+
+  <div class="card no-print">
+    <h2>Histórico <span id="savedCount" class="badge">0</span></h2>
+    <div id="savedQuotes"><p class="small">Ainda não existem orçamentos guardados.</p></div>
   </div>
 </div>
 
 <script>
-const eur = new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'});
+const eur=new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'});
+const STORE='obrasdelite_orcamentos_v2';
 let itemId=0;
 
-function addItem(desc='',qtd=1,un='un',preco=0){
+function esc(s){return String(s??'').replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;')}
+function v(id){return document.getElementById(id).value}
+function addItem(desc='',qtd=1,un='vg',preco=0){
   itemId++;
   const tr=document.createElement('tr');
-  tr.innerHTML=`
-    <td><input class="desc" value="${escapeHtml(desc)}" placeholder="Descrição do trabalho"></td>
-    <td><input class="qtd" type="number" min="0" step="0.01" value="${qtd}" oninput="calc()"></td>
-    <td><input class="un" value="${un}" style="width:70px"></td>
-    <td><input class="preco" type="number" min="0" step="0.01" value="${preco}" oninput="calc()"></td>
-    <td class="linhaTotal num">0,00 €</td>
-    <td class="no-print"><button class="danger" onclick="this.closest('tr').remove();calc()">×</button></td>`;
-  document.getElementById('items').appendChild(tr);
-  calc();
+  tr.innerHTML=`<td><div class="fieldrow"><input class="desc" value="${esc(desc)}" placeholder="Descrição do trabalho"><button class="mic no-print" onclick="ditarElemento(this.previousElementSibling)">🎤</button></div></td>
+  <td><input class="qtd" type="number" min="0" step="0.01" value="${qtd}" oninput="calc()"></td>
+  <td><input class="un" value="${esc(un)}" style="width:70px"></td>
+  <td><input class="preco" type="number" min="0" step="0.01" value="${preco}" oninput="calc()"></td>
+  <td class="linhaTotal num">0,00 €</td><td class="no-print"><button class="danger" onclick="this.closest('tr').remove();calc()">×</button></td>`;
+  document.getElementById('items').appendChild(tr);calc();
 }
-
 function calc(){
   let subtotal=0;
-  document.querySelectorAll('#items tr').forEach(tr=>{
-    const q=parseFloat(tr.querySelector('.qtd').value)||0;
-    const p=parseFloat(tr.querySelector('.preco').value)||0;
-    const t=q*p; subtotal+=t;
-    tr.querySelector('.linhaTotal').textContent=eur.format(t);
-  });
-  const iva=parseFloat(document.getElementById('iva').value)||0;
-  const desconto=parseFloat(document.getElementById('desconto').value)||0;
-  const ivaV=subtotal*iva/100;
-  const total=Math.max(0,subtotal+ivaV-desconto);
-  document.getElementById('subtotal').textContent=eur.format(subtotal);
-  document.getElementById('ivaValor').textContent=eur.format(ivaV);
-  document.getElementById('descontoValor').textContent=eur.format(desconto);
-  document.getElementById('total').textContent=eur.format(total);
+  document.querySelectorAll('#items tr').forEach(tr=>{const q=parseFloat(tr.querySelector('.qtd').value)||0;const p=parseFloat(tr.querySelector('.preco').value)||0;const t=q*p;subtotal+=t;tr.querySelector('.linhaTotal').textContent=eur.format(t)});
+  const iva=parseFloat(v('iva'))||0, desconto=parseFloat(v('desconto'))||0, ivaV=subtotal*iva/100,total=Math.max(0,subtotal+ivaV-desconto);
+  document.getElementById('subtotal').textContent=eur.format(subtotal);document.getElementById('ivaValor').textContent=eur.format(ivaV);document.getElementById('descontoValor').textContent=eur.format(desconto);document.getElementById('total').textContent=eur.format(total);
+  return {subtotal,ivaV,total};
 }
-
 function recolher(){
-  return {
-    orcNumero: v('orcNumero'), orcData:v('orcData'), cliente:v('cliente'),
-    contacto:v('contacto'), morada:v('morada'), observacoes:v('observacoes'),
-    iva:v('iva'), desconto:v('desconto'),
-    items:[...document.querySelectorAll('#items tr')].map(tr=>({
-      desc:tr.querySelector('.desc').value,
-      qtd:tr.querySelector('.qtd').value,
-      un:tr.querySelector('.un').value,
-      preco:tr.querySelector('.preco').value
-    })),
-    logo: localStorage.getItem('obrasdelite_logo') || ''
-  };
+  const total=calc().total;
+  return {id:Date.now(),orcNumero:v('orcNumero'),orcData:v('orcData'),cliente:v('cliente'),contacto:v('contacto'),morada:v('morada'),observacoes:v('observacoes'),iva:v('iva'),desconto:v('desconto'),total,
+  items:[...document.querySelectorAll('#items tr')].map(tr=>({desc:tr.querySelector('.desc').value,qtd:tr.querySelector('.qtd').value,un:tr.querySelector('.un').value,preco:tr.querySelector('.preco').value}))};
 }
-
 function preencher(d){
-  ['orcNumero','orcData','cliente','contacto','morada','observacoes','iva','desconto'].forEach(k=>{
-    if(d[k]!==undefined) document.getElementById(k).value=d[k];
-  });
-  document.getElementById('items').innerHTML='';
-  (d.items||[]).forEach(i=>addItem(i.desc,i.qtd,i.un,i.preco));
-  if(!d.items?.length) addItem();
-  if(d.logo) setLogo(d.logo);
-  calc();
+  ['orcNumero','orcData','cliente','contacto','morada','observacoes','iva','desconto'].forEach(k=>{if(d[k]!==undefined)document.getElementById(k).value=d[k]});
+  document.getElementById('items').innerHTML='';(d.items||[]).forEach(i=>addItem(i.desc,i.qtd,i.un,i.preco));if(!(d.items||[]).length)addItem();calc();window.scrollTo({top:0,behavior:'smooth'});
 }
+function getAll(){try{return JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){return[]}}
 function guardar(){
-  localStorage.setItem('obrasdelite_orcamento',JSON.stringify(recolher()));
-  alert('Orçamento guardado neste dispositivo.');
+  const d=recolher();if(!d.orcNumero.trim())d.orcNumero=proximoNumero();
+  let all=getAll();const idx=all.findIndex(x=>x.orcNumero===d.orcNumero);
+  if(idx>=0){d.id=all[idx].id;all[idx]=d}else all.unshift(d);
+  localStorage.setItem(STORE,JSON.stringify(all));document.getElementById('orcNumero').value=d.orcNumero;renderHistorico();alert('Orçamento guardado.');
 }
-function carregar(){
-  const d=localStorage.getItem('obrasdelite_orcamento');
-  if(!d) return alert('Ainda não existe nenhum orçamento guardado.');
-  preencher(JSON.parse(d));
+function abrir(id){const q=getAll().find(x=>x.id===id);if(q)preencher(q)}
+function apagar(id){if(!confirm('Apagar este orçamento?'))return;localStorage.setItem(STORE,JSON.stringify(getAll().filter(x=>x.id!==id)));renderHistorico()}
+function duplicar(id){const q=getAll().find(x=>x.id===id);if(!q)return;const c=structuredClone(q);c.orcNumero=proximoNumero();preencher(c)}
+function renderHistorico(){
+  const all=getAll(),box=document.getElementById('savedQuotes');document.getElementById('savedCount').textContent=all.length;
+  box.innerHTML=all.length?'':'<p class="small">Ainda não existem orçamentos guardados.</p>';
+  all.slice(0,50).forEach(q=>{const el=document.createElement('div');el.className='saved-row';el.innerHTML=`<div class="saved-info"><strong>${esc(q.orcNumero||'Sem número')} — ${esc(q.cliente||'Sem cliente')}</strong><span>${esc(q.orcData||'')} · ${eur.format(Number(q.total)||0)}</span></div><div class="saved-actions"><button class="secondary" onclick="abrir(${q.id})">Abrir</button><button class="secondary" onclick="duplicar(${q.id})">Duplicar</button><button class="danger" onclick="apagar(${q.id})">Apagar</button></div>`;box.appendChild(el)});
 }
-function limpar(){
-  if(!confirm('Criar um orçamento novo?')) return;
-  const logo=localStorage.getItem('obrasdelite_logo');
-  localStorage.removeItem('obrasdelite_orcamento');
-  document.querySelectorAll('input:not(#logoInput), textarea').forEach(e=>e.value='');
-  document.getElementById('iva').value='23';
-  document.getElementById('desconto').value='0';
-  document.getElementById('orcData').valueAsDate=new Date();
-  document.getElementById('items').innerHTML='';
-  addItem();
-  if(logo) setLogo(logo);
+function proximoNumero(){
+  const ano=new Date().getFullYear();const nums=getAll().map(q=>q.orcNumero||'').filter(n=>n.startsWith(ano+'-')).map(n=>parseInt(n.split('-')[1])||0);return `${ano}-${String(Math.max(0,...nums)+1).padStart(3,'0')}`;
 }
-function v(id){return document.getElementById(id).value}
-function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;')}
-
-document.getElementById('logoInput').addEventListener('change',e=>{
-  const f=e.target.files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{ localStorage.setItem('obrasdelite_logo',r.result); setLogo(r.result); };
-  r.readAsDataURL(f);
-});
-function setLogo(src){
-  const img=document.getElementById('logoImg');
-  img.src=src; img.classList.remove('hidden');
-  document.getElementById('logoPlaceholder').style.display='none';
+function novo(){
+  if(!confirm('Criar um orçamento novo?'))return;['cliente','contacto','morada','observacoes'].forEach(k=>document.getElementById(k).value='');document.getElementById('orcNumero').value=proximoNumero();document.getElementById('orcData').valueAsDate=new Date();document.getElementById('iva').value='23';document.getElementById('desconto').value='0';document.getElementById('items').innerHTML='';addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);calc();window.scrollTo({top:0,behavior:'smooth'});
 }
-
-document.getElementById('orcData').valueAsDate=new Date();
-const savedLogo=localStorage.getItem('obrasdelite_logo');
-if(savedLogo) setLogo(savedLogo);
-addItem('Demolições / preparação',1,'vg',0);
-addItem('Mão de obra',1,'vg',0);
-calc();
+function partilharWhatsApp(){
+  const d=recolher(),t=calc();const linhas=d.items.filter(i=>i.desc.trim()).map(i=>`• ${i.desc} — ${i.qtd} ${i.un} × ${eur.format(Number(i.preco)||0)}`);
+  const msg=[`OBRASD'ELITE — ORÇAMENTO ${d.orcNumero||''}`,`Cliente: ${d.cliente||'-'}`,`Local: ${d.morada||'-'}`,'',...linhas,'',`Subtotal: ${eur.format(t.subtotal)}`,`IVA: ${eur.format(t.ivaV)}`,`TOTAL: ${eur.format(t.total)}`,d.observacoes?`\nObservações: ${d.observacoes}`:''].join('\n');
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+function ditar(id){ditarElemento(document.getElementById(id))}
+function ditarElemento(el){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('O ditado por voz não está disponível neste navegador.');return}
+  const r=new SR();r.lang='pt-PT';r.interimResults=false;r.maxAlternatives=1;document.getElementById('voiceStatus').textContent='🎤 A ouvir...';
+  r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
+  r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
+}
+document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem('obrasdelite_logo',r.result);document.getElementById('logoImg').src=r.result};r.readAsDataURL(f)});
+const savedLogo=localStorage.getItem('obrasdelite_logo');if(savedLogo)document.getElementById('logoImg').src=savedLogo;
+document.getElementById('orcData').valueAsDate=new Date();document.getElementById('orcNumero').value=proximoNumero();addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);renderHistorico();calc();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js');
-  });
-}
-</script>
-
 </body>
 </html>
