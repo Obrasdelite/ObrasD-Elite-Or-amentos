@@ -4,9 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ObrasD'Elite - Orçamentos</title>
-<link rel="icon" type="image/png" sizes="192x192" href="ícone-192%20(1).png">
-<link rel="apple-touch-icon" href="ícone-192%20(1).png">
-<link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1f2f33">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.json">
+
 <style>
   :root{
     --bg:#f4f5f7;
@@ -300,10 +302,14 @@ addItem('Demolições / preparação',1,'vg',0);
 addItem('Mão de obra',1,'vg',0);
 calc();
 </script>
-</body>
-</html>
+
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js');
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
 }
 </script>
+
+</body>
+</html>
