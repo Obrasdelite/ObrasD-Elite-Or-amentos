@@ -54,6 +54,104 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
 .desc-print{display:block!important;width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.35!important}
 .logoBox{border:0!important}
 }
+
+@media print{
+  header{position:relative!important;min-height:75px!important;display:block!important}
+  header .logoBox{
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    width:120px!important;
+    height:72px!important;
+    margin:0!important;
+    display:block!important;
+  }
+  header .logoBox img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+  }
+  header>div:not(.logoBox){padding-right:135px!important}
+  .assinaturas-pdf{
+    display:flex!important;
+    justify-content:space-between!important;
+    gap:35px!important;
+    margin-top:55px!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+  .assinatura-pdf{
+    width:46%!important;
+    text-align:center!important;
+    font-size:9pt!important;
+  }
+  .assinatura-pdf .linha{
+    border-top:1px solid #222!important;
+    margin-bottom:6px!important;
+  }
+}
+
+
+@media print {
+  /* Cabeçalho / logótipo */
+  header { position: relative !important; min-height: 82px !important; }
+  header .logoBox {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 125px !important;
+    height: 75px !important;
+  }
+  header .logoBox img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* Dados do orçamento: impedir cortes */
+  .print-client,
+  .print-contact,
+  .print-address {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  /* Qualquer texto da área de dados deve poder quebrar linha */
+  .print-sheet .value,
+  .print-sheet td,
+  .print-sheet th {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  /* Assinaturas */
+  .assinaturas-pdf {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 40px !important;
+    margin-top: 70px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .assinatura-pdf {
+    width: 46% !important;
+    text-align: center !important;
+  }
+  .assinatura-pdf .linha {
+    border-top: 1px solid #222 !important;
+    margin-bottom: 7px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -124,6 +222,18 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     <h2>Histórico <span id="savedCount" class="badge">0</span></h2>
     <div id="savedQuotes"><p class="small">Ainda não existem orçamentos guardados.</p></div>
   </div>
+
+<div class="assinaturas-pdf print-only">
+  <div class="assinatura-pdf">
+    <div class="linha"></div>
+    <div>Assinatura do Cliente</div>
+  </div>
+  <div class="assinatura-pdf">
+    <div class="linha"></div>
+    <div>Assinatura do Técnico / Gerente</div>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -198,5 +308,28 @@ const savedLogo=localStorage.getItem('obrasdelite_logo');if(savedLogo)document.g
 document.getElementById('orcData').valueAsDate=new Date();document.getElementById('orcNumero').value=proximoNumero();addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);renderHistorico();calc();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
+
+<script>
+(function(){
+  function tagPrintFields(){
+    const all = Array.from(document.querySelectorAll('body *'));
+    const labels = [
+      ['Cliente','print-client'],
+      ['Contacto','print-contact'],
+      ['Morada / Local da obra','print-address']
+    ];
+    labels.forEach(([txt, cls])=>{
+      const label = all.find(el => el.children.length === 0 && el.textContent.trim() === txt);
+      if(label){
+        let box = label.parentElement;
+        if(box) box.classList.add(cls);
+      }
+    });
+  }
+  tagPrintFields();
+  window.addEventListener('beforeprint', tagPrintFields);
+})();
+</script>
+
 </body>
 </html>
