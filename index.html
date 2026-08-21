@@ -29,9 +29,29 @@ td input{padding:9px}.num{text-align:right}.totals{margin-left:auto;max-width:36
 .saved-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:12px 0}.saved-info{min-width:0}
 .saved-info strong{display:block}.saved-info span{font-size:12px;color:var(--muted)}.saved-actions{display:flex;gap:6px;flex-wrap:wrap}
 .saved-actions button{padding:8px 10px;font-size:12px}.badge{display:inline-block;background:#eef1f4;padding:4px 8px;border-radius:99px;font-size:11px;color:#444}
-.voice-status{font-size:12px;color:var(--ok);margin-top:8px;min-height:16px}
+.voice-status{font-size:12px;color:var(--ok);margin-top:8px;min-height:16px}.print-only{display:none}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.app{padding:10px}.logoBox{width:140px;height:108px}.brand h1{font-size:19px}.card{padding:16px;border-radius:22px}}
-@media print{body{background:#fff}.no-print{display:none!important}.app{max-width:none;padding:0}.card{box-shadow:none;border-radius:0;margin:0;padding:8px 0}input,textarea,select{border:0;padding:0;background:transparent;appearance:none}.logoBox{border:0}}
+@media print{
+  @page{size:A4;margin:14mm}
+  html,body{width:100%;background:#fff;overflow:visible!important}
+  .no-print{display:none!important}
+  .print-only{display:block!important}
+  .desc-edit{display:none!important}
+  .app{max-width:none!important;width:100%!important;padding:0!important;margin:0!important;overflow:visible!important}
+  .card{box-shadow:none!important;border-radius:0!important;margin:0 0 10px!important;padding:6px 0!important;overflow:visible!important;break-inside:avoid}
+  .card>div[style*="overflow-x:auto"]{overflow:visible!important}
+  table{width:100%!important;min-width:0!important;table-layout:fixed!important}
+  th,td{padding:6px 5px!important;font-size:10.5pt!important;vertical-align:top!important;overflow:visible!important}
+  th:nth-child(1),td:nth-child(1){width:42%!important}
+  th:nth-child(2),td:nth-child(2){width:10%!important}
+  th:nth-child(3),td:nth-child(3){width:10%!important}
+  th:nth-child(4),td:nth-child(4){width:18%!important}
+  th:nth-child(5),td:nth-child(5){width:20%!important;text-align:right!important}
+  input,textarea,select{border:0!important;padding:0!important;background:transparent!important;appearance:none!important;box-shadow:none!important}
+  td input{font-size:10.5pt!important;min-width:0!important;width:100%!important}
+  .desc-print{white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.35!important}
+  .logoBox{border:0!important}
+}
 </style>
 </head>
 <body>
@@ -114,7 +134,7 @@ function v(id){return document.getElementById(id).value}
 function addItem(desc='',qtd=1,un='vg',preco=0){
   itemId++;
   const tr=document.createElement('tr');
-  tr.innerHTML=`<td><div class="fieldrow"><input class="desc" value="${esc(desc)}" placeholder="Descrição do trabalho"><button class="mic no-print" onclick="ditarElemento(this.previousElementSibling)">🎤</button></div></td>
+  tr.innerHTML=`<td><div class="fieldrow desc-edit"><input class="desc" value="${esc(desc)}" placeholder="Descrição do trabalho"><button class="mic no-print" onclick="ditarElemento(this.previousElementSibling)">🎤</button></div><div class="print-only desc-print">${esc(desc)}</div></td>
   <td><input class="qtd" type="number" min="0" step="0.01" value="${qtd}" oninput="calc()"></td>
   <td><input class="un" value="${esc(un)}" style="width:70px"></td>
   <td><input class="preco" type="number" min="0" step="0.01" value="${preco}" oninput="calc()"></td>
@@ -170,6 +190,7 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
+window.addEventListener('beforeprint',()=>{document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc');const p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});});
 document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem('obrasdelite_logo',r.result);document.getElementById('logoImg').src=r.result};r.readAsDataURL(f)});
 const savedLogo=localStorage.getItem('obrasdelite_logo');if(savedLogo)document.getElementById('logoImg').src=savedLogo;
 document.getElementById('orcData').valueAsDate=new Date();document.getElementById('orcNumero').value=proximoNumero();addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);renderHistorico();calc();
