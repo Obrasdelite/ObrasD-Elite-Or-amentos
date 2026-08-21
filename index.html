@@ -181,41 +181,263 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   }
 }
 
-/* Dados fixos da empresa */
-.empresa-dados{font-size:12px;line-height:1.45;color:var(--muted);margin-top:6px}
+
+/* ===== Cabeçalho final inspirado no modelo aprovado ===== */
+.company-header{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 210px;
+  gap:24px;
+  align-items:start;
+  margin-bottom:14px;
+}
+.company-copy h1{font-size:28px;margin:0 0 4px}
+.company-subtitle{font-size:18px;margin:0 0 14px;color:var(--text)}
+.company-fields{display:grid;gap:7px;max-width:420px}
+.company-line{display:flex;align-items:center;gap:8px;font-size:14px}
+.company-line span{font-weight:700;white-space:nowrap}
+.company-line input{
+  width:auto;
+  flex:1;
+  min-width:0;
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  padding:4px 2px;
+  background:transparent;
+  font-size:14px;
+}
+.company-header .logoBox{
+  width:210px;
+  height:125px;
+  margin-left:auto;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.header-rule{height:1px;background:#8b8f94;margin:2px 0 22px}
+
+.data-card{padding-top:18px}
+.quote-strip{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  width:min(100%,570px);
+  border:1px solid #aeb3ba;
+  padding:10px 14px;
+  margin:0 0 26px;
+}
+.quote-inline{display:flex;align-items:center;gap:8px;min-width:0}
+.quote-inline span{white-space:nowrap}
+.quote-inline input{
+  border:0;
+  border-radius:0;
+  padding:0;
+  background:transparent;
+  font-weight:700;
+  min-width:0;
+}
+.quote-inline:first-child input{width:120px}
+.quote-inline:last-child input{width:150px}
+.quote-separator{width:1px;height:28px;background:#9da2a8;flex:none}
+
+.client-grid{
+  display:grid;
+  grid-template-columns:1.2fr .75fr 1.2fr;
+  gap:28px;
+  align-items:start;
+}
+.client-field label{font-weight:700;color:var(--text);margin-bottom:7px}
+.client-field input{font-size:15px}
+
+@media(max-width:680px){
+  .company-header{grid-template-columns:minmax(0,1fr) 118px;gap:14px}
+  .company-copy h1{font-size:22px}
+  .company-subtitle{font-size:15px}
+  .company-header .logoBox{width:118px;height:78px}
+  .company-line{font-size:12px}
+  .company-line input{font-size:12px}
+  .quote-strip{gap:10px;padding:10px}
+  .quote-inline{gap:5px;font-size:12px}
+  .quote-inline:first-child input{width:92px;font-size:13px}
+  .quote-inline:last-child input{width:118px;font-size:13px}
+  .client-grid{grid-template-columns:1fr;gap:14px}
+}
+
 @media print{
-  .empresa-dados{font-size:8.5pt!important;line-height:1.35!important;color:#222!important;margin-top:4px!important}
-  .topbar{min-height:92px!important}
-  .topbar .brand>div{padding-right:145px!important}
-  /* Data fica alinhada com o número do orçamento no topo dos dados */
-  #orcData{font-weight:600!important}
+  @page{size:A4 portrait;margin:12mm}
+
+  .company-header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 135px!important;
+    gap:18px!important;
+    align-items:start!important;
+    min-height:95px!important;
+    margin:0 0 10px!important;
+    position:static!important;
+  }
+  .company-copy{padding:0!important}
+  .company-copy h1{font-size:20pt!important;margin:0 0 3px!important}
+  .company-subtitle{font-size:11.5pt!important;margin:0 0 9px!important;color:#222!important}
+  .company-fields{display:grid!important;gap:4px!important;max-width:none!important}
+  .company-line{display:flex!important;gap:5px!important;font-size:9pt!important;line-height:1.2!important}
+  .company-line span{font-weight:600!important}
+  .company-line input{
+    display:inline-block!important;
+    flex:none!important;
+    width:auto!important;
+    max-width:240px!important;
+    border:0!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:9pt!important;
+    color:#111!important;
+    font-weight:400!important;
+    background:transparent!important;
+  }
+  .company-header .logoBox{
+    display:block!important;
+    position:static!important;
+    width:135px!important;
+    height:82px!important;
+    margin:0 0 0 auto!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+  }
+  .company-header .logoBox img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+  }
+  .header-rule{display:block!important;height:1px!important;background:#666!important;margin:4px 0 16px!important}
+
+  .data-card{padding:0!important;margin:0 0 12px!important}
+  .data-card h2{font-size:14pt!important;margin:0 0 11px!important}
+
+  .quote-strip{
+    display:flex!important;
+    width:440px!important;
+    max-width:100%!important;
+    gap:16px!important;
+    border:1px solid #888!important;
+    padding:8px 12px!important;
+    margin:0 0 24px!important;
+  }
+  .quote-inline{display:flex!important;align-items:center!important;gap:6px!important;font-size:10pt!important}
+  .quote-inline input{
+    display:inline-block!important;
+    border:0!important;
+    padding:0!important;
+    width:auto!important;
+    font-size:10pt!important;
+    font-weight:700!important;
+  }
+  .quote-inline:first-child input{width:95px!important}
+  .quote-inline:last-child input{width:110px!important}
+  .quote-separator{display:block!important;width:1px!important;height:24px!important;background:#888!important}
+
+  .client-grid{
+    display:grid!important;
+    grid-template-columns:1.15fr .75fr 1.2fr!important;
+    gap:24px!important;
+    margin-bottom:6px!important;
+  }
+  .client-field,
+  .print-client,
+  .print-contact,
+  .print-address{
+    grid-column:auto!important;
+    width:auto!important;
+    max-width:none!important;
+  }
+  .client-field label{font-size:9.5pt!important;font-weight:700!important;margin:0 0 5px!important;color:#111!important}
+  .client-field .fieldrow{display:block!important}
+  .client-field input{
+    display:block!important;
+    width:100%!important;
+    border:0!important;
+    padding:0!important;
+    margin:0!important;
+    font-size:10pt!important;
+    font-weight:400!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+  }
 }
 
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar">
-    <div class="brand">
-      <label class="logoBox" for="logoInput" title="Alterar logótipo"><img id="logoImg" src="./icon-512.png" alt="ObrasD'Elite"></label>
-      <div>
-        <h1>ObrasD'Elite — Orçamento</h1>
-        <p>Remodelações e Construção</p>
-        <div class="empresa-dados">Alvará n.º 115318-PAR<br>Email: geral@obrasdelite.com<br>Tlm: 926573393</div>
+  <div class="topbar company-header">
+    <div class="company-copy">
+      <h1>ObrasD'Elite — Orçamento</h1>
+      <p class="company-subtitle">Remodelações e Construção</p>
+
+      <div class="company-fields">
+        <div class="company-line">
+          <span>Alvará n.º</span>
+          <input id="alvara" value="115318-PAR" aria-label="Alvará da empresa">
+        </div>
+        <div class="company-line">
+          <span>Email:</span>
+          <input id="empresaEmail" type="email" value="geral@obrasdelite.com" aria-label="Email da empresa">
+        </div>
+        <div class="company-line">
+          <span>Tlm.:</span>
+          <input id="empresaTlm" value="926573393" aria-label="Telemóvel da empresa">
+        </div>
       </div>
     </div>
+
+    <label class="logoBox" for="logoInput" title="Alterar logótipo">
+      <img id="logoImg" src="./icon-512.png" alt="ObrasD'Elite">
+    </label>
     <input class="hidden" type="file" id="logoInput" accept="image/*">
   </div>
+  <div class="header-rule"></div>
 
-  <div class="card">
+  <div class="card data-card">
     <h2>Dados do orçamento</h2>
-    <div class="grid">
-      <div><label>N.º do orçamento</label><input id="orcNumero" placeholder="Ex.: 2026-001"></div>
-      <div><label>Data</label><input id="orcData" type="date"></div>
-      <div><label>Cliente</label><div class="fieldrow"><input id="cliente" placeholder="Nome do cliente"><button class="mic no-print" onclick="ditar('cliente')" title="Ditar">🎤</button></div></div>
-      <div><label>Contacto</label><div class="fieldrow"><input id="contacto" placeholder="Telefone / email"><button class="mic no-print" onclick="ditar('contacto')" title="Ditar">🎤</button></div></div>
-      <div style="grid-column:1/-1"><label>Morada / Local da obra</label><div class="fieldrow"><input id="morada" placeholder="Morada da obra"><button class="mic no-print" onclick="ditar('morada')" title="Ditar">🎤</button></div></div>
+
+    <div class="quote-strip">
+      <div class="quote-inline">
+        <span>Orçamento n.º</span>
+        <input id="orcNumero" placeholder="2026-001">
+      </div>
+      <div class="quote-separator"></div>
+      <div class="quote-inline">
+        <span>Data:</span>
+        <input id="orcData" type="date">
+      </div>
     </div>
+
+    <div class="client-grid">
+      <div class="client-field">
+        <label>Cliente</label>
+        <div class="fieldrow">
+          <input id="cliente" placeholder="Nome do cliente">
+          <button class="mic no-print" onclick="ditar('cliente')" title="Ditar">🎤</button>
+        </div>
+      </div>
+      <div class="client-field">
+        <label>Contacto</label>
+        <div class="fieldrow">
+          <input id="contacto" placeholder="Telefone / email">
+          <button class="mic no-print" onclick="ditar('contacto')" title="Ditar">🎤</button>
+        </div>
+      </div>
+      <div class="client-field address-field">
+        <label>Morada / Local da obra</label>
+        <div class="fieldrow">
+          <input id="morada" placeholder="Morada da obra">
+          <button class="mic no-print" onclick="ditar('morada')" title="Ditar">🎤</button>
+        </div>
+      </div>
+    </div>
+
     <div id="voiceStatus" class="voice-status no-print"></div>
   </div>
 
@@ -343,33 +565,19 @@ function ditarElemento(el){
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
 window.addEventListener('beforeprint',()=>{document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc');const p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});});
+const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
+['alvara','empresaEmail','empresaTlm'].forEach(id=>{
+  const el=document.getElementById(id);
+  const saved=localStorage.getItem('obrasdelite_'+id);
+  el.value=saved || COMPANY_DEFAULTS[id];
+  el.addEventListener('input',()=>localStorage.setItem('obrasdelite_'+id,el.value));
+});
 document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem('obrasdelite_logo',r.result);document.getElementById('logoImg').src=r.result};r.readAsDataURL(f)});
 const savedLogo=localStorage.getItem('obrasdelite_logo');if(savedLogo)document.getElementById('logoImg').src=savedLogo;
 document.getElementById('orcData').valueAsDate=new Date();document.getElementById('orcNumero').value=proximoNumero();addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);renderHistorico();calc();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
 
-<script>
-(function(){
-  function tagPrintFields(){
-    const all = Array.from(document.querySelectorAll('body *'));
-    const labels = [
-      ['Cliente','print-client'],
-      ['Contacto','print-contact'],
-      ['Morada / Local da obra','print-address']
-    ];
-    labels.forEach(([txt, cls])=>{
-      const label = all.find(el => el.children.length === 0 && el.textContent.trim() === txt);
-      if(label){
-        let box = label.parentElement;
-        if(box) box.classList.add(cls);
-      }
-    });
-  }
-  tagPrintFields();
-  window.addEventListener('beforeprint', tagPrintFields);
-})();
-</script>
 
 </body>
 </html>
