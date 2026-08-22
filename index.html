@@ -368,30 +368,110 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
 }
 
 
-/* ===== Observações: impressão robusta sem cortes ===== */
+/* ===== PDF final: Totais em cima + Observações / Condições em largura total ===== */
 .obs-print{display:none}
 
 @media print{
-  .obs-totals-card{
+  .summary-print-card{
     display:block!important;
+    width:100%!important;
+    overflow:visible!important;
     break-inside:auto!important;
     page-break-inside:auto!important;
-    overflow:visible!important;
+    margin-top:8px!important;
   }
 
-  .obs-totals-grid{
-    display:block!important;
-    overflow:visible!important;
+  .summary-print-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:14px!important;
+    width:100%!important;
   }
 
-  .obs-column{
+  /* Totais primeiro */
+  .totals-column{
+    order:1!important;
     display:block!important;
     width:100%!important;
     max-width:none!important;
+    margin:0!important;
+    padding:10px 12px!important;
+    border:1px solid #aaa!important;
+    border-radius:10px!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+
+  .totals-column h2{display:none!important}
+
+  .totals-column>.grid{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:22px!important;
+    margin-bottom:4px!important;
+  }
+
+  .totals-column>.grid>div{
+    display:grid!important;
+    grid-template-columns:auto 1fr!important;
+    align-items:center!important;
+    gap:8px!important;
+  }
+
+  .totals-column label{
+    margin:0!important;
+    font-size:9pt!important;
+    color:#111!important;
+    font-weight:600!important;
+  }
+
+  .totals-column select,
+  .totals-column input{
+    width:auto!important;
+    min-width:0!important;
+    border:0!important;
+    padding:0!important;
+    font-size:9.5pt!important;
+    background:transparent!important;
+  }
+
+  .totals-column .totals{
+    max-width:none!important;
+    margin:0!important;
+  }
+
+  .totals-column .totals div{
+    padding:5px 0!important;
+    font-size:10pt!important;
+  }
+
+  .totals-column .grand{
+    font-size:16pt!important;
+    border-top:2px solid #222!important;
+    margin-top:3px!important;
+    padding-top:8px!important;
+  }
+
+  /* Observações por baixo, largura total */
+  .obs-column{
+    order:2!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:10px 12px!important;
+    border:1px solid #aaa!important;
+    border-radius:10px!important;
     overflow:visible!important;
     break-inside:auto!important;
     page-break-inside:auto!important;
-    margin:0 0 18px!important;
+  }
+
+  .obs-column h2{
+    margin:0 0 9px!important;
+    font-size:12pt!important;
+    break-after:avoid!important;
+    page-break-after:avoid!important;
   }
 
   .obs-edit{display:none!important}
@@ -406,97 +486,17 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     white-space:pre-wrap!important;
     overflow-wrap:anywhere!important;
     word-break:normal!important;
-    font-size:10pt!important;
-    line-height:1.38!important;
+    font-size:9.5pt!important;
+    line-height:1.35!important;
     break-inside:auto!important;
     page-break-inside:auto!important;
   }
 
-  .obs-column h2{
-    break-after:avoid!important;
-    page-break-after:avoid!important;
-    margin-bottom:8px!important;
-  }
-
-  .totals-column{
-    display:block!important;
-    width:100%!important;
-    max-width:360px!important;
-    margin-left:auto!important;
-    break-inside:avoid!important;
-    page-break-inside:avoid!important;
-  }
-
   .assinaturas-pdf{
-    clear:both!important;
+    margin-top:28px!important;
     break-inside:avoid!important;
     page-break-inside:avoid!important;
   }
-}
-
-
-/* ===== Layout final do PDF: Observações largas + Totais por baixo ===== */
-@media print{
-  .obs-totals-grid{
-    display:block!important;
-  }
-
-  .obs-column{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin:0 0 14px 0!important;
-    overflow:visible!important;
-  }
-
-  .obs-print{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    box-sizing:border-box!important;
-    white-space:pre-wrap!important;
-    overflow-wrap:anywhere!important;
-    word-break:normal!important;
-    height:auto!important;
-    max-height:none!important;
-    overflow:visible!important;
-    line-height:1.35!important;
-  }
-
-  .totals-column{
-    display:block!important;
-    width:48%!important;
-    max-width:360px!important;
-    margin:10px 0 0 auto!important;
-    break-inside:avoid!important;
-    page-break-inside:avoid!important;
-  }
-
-  .assinaturas-pdf{
-    width:100%!important;
-    clear:both!important;
-    margin-top:38px!important;
-    break-inside:avoid!important;
-    page-break-inside:avoid!important;
-  }
-}
-
-
-/* ===== Layout aprovado: Totais em cima + Observações/Condições a toda a largura ===== */
-.obs-totals-card{display:block}
-.obs-totals-card .totals-column{width:100%;max-width:none;margin:0 0 18px}
-.obs-totals-card .obs-column{width:100%;max-width:none;margin:0}
-.obs-totals-card .obs-edit{width:100%}
-.obs-totals-card .obs-edit textarea{width:100%;min-height:220px}
-@media print{
-  .obs-totals-card{display:block!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
-  .obs-totals-card .totals-column{display:block!important;width:100%!important;max-width:100%!important;margin:0 0 16px!important;border:1px solid #cfd3d8!important;border-radius:10px!important;padding:10px 12px!important;box-sizing:border-box!important;break-inside:avoid!important;page-break-inside:avoid!important}
-  .obs-totals-card .totals-column h2{margin:0 0 8px!important}
-  .obs-totals-card .totals-options{grid-template-columns:1fr 1fr!important;gap:24px!important}
-  .obs-totals-card .obs-column{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;border:1px solid #cfd3d8!important;border-radius:10px!important;padding:10px 12px!important;box-sizing:border-box!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
-  .obs-totals-card .obs-column h2{margin:0 0 8px!important}
-  .obs-totals-card .obs-print{display:block!important;width:100%!important;max-width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;height:auto!important;max-height:none!important;overflow:visible!important;line-height:1.35!important}
-  .assinaturas-pdf{margin-top:34px!important}
 }
 
 </style>
@@ -584,19 +584,21 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     <button class="add no-print" onclick="addItem()">+ Adicionar trabalho</button>
   </div>
 
-  <div class="card obs-totals-card">
-    <div class="totals-column">
-      <h2>Totais</h2>
-      <div class="grid totals-options">
-        <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
-        <div><label>Desconto (€)</label><input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()"></div>
+  <div class="card summary-print-card">
+    <div class="grid summary-print-grid">
+      <div class="obs-column">
+        <h2>Observações / Condições</h2>
+        <div class="fieldrow obs-edit"><textarea id="observacoes" placeholder="Materiais incluídos, condições de pagamento, prazo previsto..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
+        <div id="observacoesPrint" class="obs-print print-only"></div>
       </div>
-      <div class="totals"><div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div><div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div><div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div><div class="grand"><span>Total</span><span id="total">0,00 €</span></div></div>
-    </div>
-    <div class="obs-column">
-      <h2>Observações / Condições</h2>
-      <div class="fieldrow obs-edit"><textarea id="observacoes" placeholder="Condições de pagamento, validade do orçamento, prazos e outras observações..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
-      <div id="observacoesPrint" class="obs-print print-only"></div>
+      <div class="totals-column">
+        <h2>Totais</h2>
+        <div class="grid">
+          <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
+          <div><label>Desconto (€)</label><input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()"></div>
+        </div>
+        <div class="totals"><div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div><div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div><div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div><div class="grand"><span>Total</span><span id="total">0,00 €</span></div></div>
+      </div>
     </div>
   </div>
 
@@ -604,7 +606,7 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     <h2>Ações</h2>
     <div class="actions">
       <button class="primary" onclick="guardar()">💾 Guardar orçamento</button>
-      <button class="secondary" onclick="imprimirPDF()">📄 Guardar / Imprimir PDF</button>
+      <button class="secondary" onclick="window.print()">📄 Guardar / Imprimir PDF</button>
       <button class="secondary" onclick="partilharWhatsApp()">🟢 WhatsApp</button>
       <button class="add" onclick="novo()">＋ Novo orçamento</button>
     </div>
@@ -683,23 +685,6 @@ function proximoNumero(){
 function novo(){
   if(!confirm('Criar um orçamento novo?'))return;['cliente','contacto','morada','observacoes'].forEach(k=>document.getElementById(k).value='');document.getElementById('orcNumero').value=proximoNumero();document.getElementById('orcData').valueAsDate=new Date();document.getElementById('iva').value='23';document.getElementById('desconto').value='0';document.getElementById('items').innerHTML='';addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);calc();window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function prepararImpressao(){
-  document.querySelectorAll('#items tr').forEach(tr=>{
-    const d=tr.querySelector('.desc');
-    const p=tr.querySelector('.desc-print');
-    if(d&&p) p.textContent=d.value;
-  });
-  const obs=document.getElementById('observacoes');
-  const obsPrint=document.getElementById('observacoesPrint');
-  if(obs&&obsPrint) obsPrint.textContent=obs.value || '';
-}
-
-function imprimirPDF(){
-  prepararImpressao();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>window.print()));
-}
-
 function partilharWhatsApp(){
   const d=recolher(),t=calc();const linhas=d.items.filter(i=>i.desc.trim()).map(i=>`• ${i.desc} — ${i.qtd} ${i.un} × ${eur.format(Number(i.preco)||0)}`);
   const msg=[`OBRASD'ELITE — ORÇAMENTO ${d.orcNumero||''}`,`Cliente: ${d.cliente||'-'}`,`Local: ${d.morada||'-'}`,'',...linhas,'',`Subtotal: ${eur.format(t.subtotal)}`,`IVA: ${eur.format(t.ivaV)}`,`TOTAL: ${eur.format(t.total)}`,d.observacoes?`\nObservações: ${d.observacoes}`:''].join('\n');
@@ -712,7 +697,16 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
-window.addEventListener('beforeprint', prepararImpressao);
+window.addEventListener('beforeprint',()=>{
+  document.querySelectorAll('#items tr').forEach(tr=>{
+    const d=tr.querySelector('.desc');
+    const p=tr.querySelector('.desc-print');
+    if(d&&p)p.textContent=d.value;
+  });
+  const obs=document.getElementById('observacoes');
+  const obsPrint=document.getElementById('observacoesPrint');
+  if(obs&&obsPrint)obsPrint.textContent=obs.value||'';
+});
 const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
 ['alvara','empresaEmail','empresaTlm'].forEach(id=>{
   const el=document.getElementById(id);
