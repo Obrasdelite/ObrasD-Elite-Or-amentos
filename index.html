@@ -712,7 +712,7 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
-window.addEventListener('beforeprint', prepararImpressao);});
+window.addEventListener('beforeprint', prepararImpressao);
 const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
 ['alvara','empresaEmail','empresaTlm'].forEach(id=>{
   const el=document.getElementById(id);
