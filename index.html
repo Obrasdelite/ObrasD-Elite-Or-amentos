@@ -367,6 +367,20 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   }
 }
 
+
+/* Correção Observações no PDF */
+.obs-print{display:none}
+@media print{
+ .obs-totals-card{break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
+ .obs-totals-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px!important;align-items:start!important;overflow:visible!important}
+ .obs-column{min-width:0!important;overflow:visible!important}
+ .obs-edit{display:none!important}
+ .obs-print{display:block!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;overflow:visible!important;height:auto!important;max-height:none!important;font-size:10pt!important;line-height:1.35!important}
+ .obs-column h2{break-after:avoid!important;page-break-after:avoid!important}
+ .totals-column{break-inside:avoid!important;page-break-inside:avoid!important}
+ .assinaturas-pdf{clear:both!important;break-inside:avoid!important;page-break-inside:avoid!important}
+}
+
 </style>
 </head>
 <body>
@@ -452,13 +466,14 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     <button class="add no-print" onclick="addItem()">+ Adicionar trabalho</button>
   </div>
 
-  <div class="card">
-    <div class="grid">
-      <div>
+  <div class="card obs-totals-card">
+    <div class="grid obs-totals-grid">
+      <div class="obs-column">
         <h2>Observações</h2>
-        <div class="fieldrow"><textarea id="observacoes" placeholder="Materiais incluídos, condições de pagamento, prazo previsto..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
+        <div class="fieldrow obs-edit"><textarea id="observacoes" placeholder="Materiais incluídos, condições de pagamento, prazo previsto..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
+        <div id="observacoesPrint" class="obs-print print-only"></div>
       </div>
-      <div>
+      <div class="totals-column">
         <h2>Totais</h2>
         <div class="grid">
           <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
@@ -564,7 +579,11 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
-window.addEventListener('beforeprint',()=>{document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc');const p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});});
+window.addEventListener('beforeprint',()=>{
+ document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc');const p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});
+ const obs=document.getElementById('observacoes'), op=document.getElementById('observacoesPrint');
+ if(obs&&op) op.textContent=obs.value;
+});
 const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
 ['alvara','empresaEmail','empresaTlm'].forEach(id=>{
   const el=document.getElementById(id);
