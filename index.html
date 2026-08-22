@@ -434,6 +434,53 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   }
 }
 
+
+/* ===== Layout final do PDF: Observações largas + Totais por baixo ===== */
+@media print{
+  .obs-totals-grid{
+    display:block!important;
+  }
+
+  .obs-column{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0 0 14px 0!important;
+    overflow:visible!important;
+  }
+
+  .obs-print{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    white-space:pre-wrap!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    line-height:1.35!important;
+  }
+
+  .totals-column{
+    display:block!important;
+    width:48%!important;
+    max-width:360px!important;
+    margin:10px 0 0 auto!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+
+  .assinaturas-pdf{
+    width:100%!important;
+    clear:both!important;
+    margin-top:38px!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+}
+
 </style>
 </head>
 <body>
