@@ -481,6 +481,24 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   }
 }
 
+
+/* ===== Layout aprovado: Totais em cima + Observações/Condições a toda a largura ===== */
+.obs-totals-card{display:block}
+.obs-totals-card .totals-column{width:100%;max-width:none;margin:0 0 18px}
+.obs-totals-card .obs-column{width:100%;max-width:none;margin:0}
+.obs-totals-card .obs-edit{width:100%}
+.obs-totals-card .obs-edit textarea{width:100%;min-height:220px}
+@media print{
+  .obs-totals-card{display:block!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
+  .obs-totals-card .totals-column{display:block!important;width:100%!important;max-width:100%!important;margin:0 0 16px!important;border:1px solid #cfd3d8!important;border-radius:10px!important;padding:10px 12px!important;box-sizing:border-box!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  .obs-totals-card .totals-column h2{margin:0 0 8px!important}
+  .obs-totals-card .totals-options{grid-template-columns:1fr 1fr!important;gap:24px!important}
+  .obs-totals-card .obs-column{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;border:1px solid #cfd3d8!important;border-radius:10px!important;padding:10px 12px!important;box-sizing:border-box!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
+  .obs-totals-card .obs-column h2{margin:0 0 8px!important}
+  .obs-totals-card .obs-print{display:block!important;width:100%!important;max-width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;height:auto!important;max-height:none!important;overflow:visible!important;line-height:1.35!important}
+  .assinaturas-pdf{margin-top:34px!important}
+}
+
 </style>
 </head>
 <body>
@@ -567,20 +585,18 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   </div>
 
   <div class="card obs-totals-card">
-    <div class="grid obs-totals-grid">
-      <div class="obs-column">
-        <h2>Observações</h2>
-        <div class="fieldrow obs-edit"><textarea id="observacoes" placeholder="Materiais incluídos, condições de pagamento, prazo previsto..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
-        <div id="observacoesPrint" class="obs-print print-only"></div>
+    <div class="totals-column">
+      <h2>Totais</h2>
+      <div class="grid totals-options">
+        <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
+        <div><label>Desconto (€)</label><input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()"></div>
       </div>
-      <div class="totals-column">
-        <h2>Totais</h2>
-        <div class="grid">
-          <div><label>IVA</label><select id="iva" onchange="calc()"><option value="0">0%</option><option value="6">6%</option><option value="13">13%</option><option value="23" selected>23%</option></select></div>
-          <div><label>Desconto (€)</label><input id="desconto" type="number" min="0" step="0.01" value="0" oninput="calc()"></div>
-        </div>
-        <div class="totals"><div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div><div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div><div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div><div class="grand"><span>Total</span><span id="total">0,00 €</span></div></div>
-      </div>
+      <div class="totals"><div><span>Subtotal</span><strong id="subtotal">0,00 €</strong></div><div><span>IVA</span><strong id="ivaValor">0,00 €</strong></div><div><span>Desconto</span><strong id="descontoValor">0,00 €</strong></div><div class="grand"><span>Total</span><span id="total">0,00 €</span></div></div>
+    </div>
+    <div class="obs-column">
+      <h2>Observações / Condições</h2>
+      <div class="fieldrow obs-edit"><textarea id="observacoes" placeholder="Condições de pagamento, validade do orçamento, prazos e outras observações..."></textarea><button class="mic no-print" onclick="ditar('observacoes')" title="Ditar">🎤</button></div>
+      <div id="observacoesPrint" class="obs-print print-only"></div>
     </div>
   </div>
 
