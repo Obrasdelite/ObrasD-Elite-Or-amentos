@@ -368,17 +368,70 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
 }
 
 
-/* Correção Observações no PDF */
+/* ===== Observações: impressão robusta sem cortes ===== */
 .obs-print{display:none}
+
 @media print{
- .obs-totals-card{break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
- .obs-totals-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px!important;align-items:start!important;overflow:visible!important}
- .obs-column{min-width:0!important;overflow:visible!important}
- .obs-edit{display:none!important}
- .obs-print{display:block!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;overflow:visible!important;height:auto!important;max-height:none!important;font-size:10pt!important;line-height:1.35!important}
- .obs-column h2{break-after:avoid!important;page-break-after:avoid!important}
- .totals-column{break-inside:avoid!important;page-break-inside:avoid!important}
- .assinaturas-pdf{clear:both!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  .obs-totals-card{
+    display:block!important;
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+    overflow:visible!important;
+  }
+
+  .obs-totals-grid{
+    display:block!important;
+    overflow:visible!important;
+  }
+
+  .obs-column{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    overflow:visible!important;
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+    margin:0 0 18px!important;
+  }
+
+  .obs-edit{display:none!important}
+
+  .obs-print{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    white-space:pre-wrap!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    font-size:10pt!important;
+    line-height:1.38!important;
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+  }
+
+  .obs-column h2{
+    break-after:avoid!important;
+    page-break-after:avoid!important;
+    margin-bottom:8px!important;
+  }
+
+  .totals-column{
+    display:block!important;
+    width:100%!important;
+    max-width:360px!important;
+    margin-left:auto!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+
+  .assinaturas-pdf{
+    clear:both!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
 }
 
 </style>
@@ -488,7 +541,7 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
     <h2>Ações</h2>
     <div class="actions">
       <button class="primary" onclick="guardar()">💾 Guardar orçamento</button>
-      <button class="secondary" onclick="window.print()">📄 Guardar / Imprimir PDF</button>
+      <button class="secondary" onclick="imprimirPDF()">📄 Guardar / Imprimir PDF</button>
       <button class="secondary" onclick="partilharWhatsApp()">🟢 WhatsApp</button>
       <button class="add" onclick="novo()">＋ Novo orçamento</button>
     </div>
@@ -567,6 +620,23 @@ function proximoNumero(){
 function novo(){
   if(!confirm('Criar um orçamento novo?'))return;['cliente','contacto','morada','observacoes'].forEach(k=>document.getElementById(k).value='');document.getElementById('orcNumero').value=proximoNumero();document.getElementById('orcData').valueAsDate=new Date();document.getElementById('iva').value='23';document.getElementById('desconto').value='0';document.getElementById('items').innerHTML='';addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);calc();window.scrollTo({top:0,behavior:'smooth'});
 }
+
+function prepararImpressao(){
+  document.querySelectorAll('#items tr').forEach(tr=>{
+    const d=tr.querySelector('.desc');
+    const p=tr.querySelector('.desc-print');
+    if(d&&p) p.textContent=d.value;
+  });
+  const obs=document.getElementById('observacoes');
+  const obsPrint=document.getElementById('observacoesPrint');
+  if(obs&&obsPrint) obsPrint.textContent=obs.value || '';
+}
+
+function imprimirPDF(){
+  prepararImpressao();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.print()));
+}
+
 function partilharWhatsApp(){
   const d=recolher(),t=calc();const linhas=d.items.filter(i=>i.desc.trim()).map(i=>`• ${i.desc} — ${i.qtd} ${i.un} × ${eur.format(Number(i.preco)||0)}`);
   const msg=[`OBRASD'ELITE — ORÇAMENTO ${d.orcNumero||''}`,`Cliente: ${d.cliente||'-'}`,`Local: ${d.morada||'-'}`,'',...linhas,'',`Subtotal: ${eur.format(t.subtotal)}`,`IVA: ${eur.format(t.ivaV)}`,`TOTAL: ${eur.format(t.total)}`,d.observacoes?`\nObservações: ${d.observacoes}`:''].join('\n');
@@ -579,11 +649,7 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
-window.addEventListener('beforeprint',()=>{
- document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc');const p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});
- const obs=document.getElementById('observacoes'), op=document.getElementById('observacoesPrint');
- if(obs&&op) op.textContent=obs.value;
-});
+window.addEventListener('beforeprint', prepararImpressao);});
 const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
 ['alvara','empresaEmail','empresaTlm'].forEach(id=>{
   const el=document.getElementById(id);
