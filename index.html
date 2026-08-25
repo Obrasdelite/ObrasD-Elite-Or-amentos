@@ -499,6 +499,14 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
   }
 }
 
+.pdf-mode{margin:0 0 14px;max-width:520px}.pdf-mode label{font-weight:700;color:var(--text);margin-bottom:7px}
+@media print{
+body.pdf-resumido table th:nth-child(4),body.pdf-resumido table td:nth-child(4),body.pdf-resumido table th:nth-child(5),body.pdf-resumido table td:nth-child(5){display:none!important}
+body.pdf-resumido table th:nth-child(1),body.pdf-resumido table td:nth-child(1){width:72%!important}
+body.pdf-resumido table th:nth-child(2),body.pdf-resumido table td:nth-child(2),body.pdf-resumido table th:nth-child(3),body.pdf-resumido table td:nth-child(3){width:14%!important;text-align:center!important}
+body.pdf-resumido .totals-column .totals>div:not(.grand){display:none!important}
+body.pdf-resumido .totals-column>.grid{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -604,6 +612,7 @@ td input{font-size:8.5pt!important;width:100%!important;min-width:0!important}
 
   <div class="card no-print">
     <h2>Ações</h2>
+    <div class="pdf-mode"><label for="mostrarValoresPDF">Valores no PDF</label><select id="mostrarValoresPDF"><option value="sim">Detalhado — mostrar valores por trabalho</option><option value="nao">Resumido — mostrar apenas o total final</option></select></div>
     <div class="actions">
       <button class="primary" onclick="guardar()">💾 Guardar orçamento</button>
       <button class="secondary" onclick="window.print()">📄 Guardar / Imprimir PDF</button>
@@ -697,16 +706,18 @@ function ditarElemento(el){
   r.onresult=e=>{const texto=e.results[0][0].transcript;el.value=(el.value?el.value+' ':'')+texto;document.getElementById('voiceStatus').textContent='✓ Texto adicionado';calc()};
   r.onerror=()=>document.getElementById('voiceStatus').textContent='Não consegui ouvir. Tente novamente.';r.onend=()=>setTimeout(()=>document.getElementById('voiceStatus').textContent='',1800);r.start();
 }
+function prepararModoPDF(){
+ const modo=document.getElementById('mostrarValoresPDF')?.value||'sim';
+ document.body.classList.toggle('pdf-resumido',modo==='nao');
+}
 window.addEventListener('beforeprint',()=>{
-  document.querySelectorAll('#items tr').forEach(tr=>{
-    const d=tr.querySelector('.desc');
-    const p=tr.querySelector('.desc-print');
-    if(d&&p)p.textContent=d.value;
-  });
-  const obs=document.getElementById('observacoes');
-  const obsPrint=document.getElementById('observacoesPrint');
-  if(obs&&obsPrint)obsPrint.textContent=obs.value||'';
+ prepararModoPDF();
+ document.querySelectorAll('#items tr').forEach(tr=>{const d=tr.querySelector('.desc'),p=tr.querySelector('.desc-print');if(d&&p)p.textContent=d.value;});
+ const obs=document.getElementById('observacoes'),op=document.getElementById('observacoesPrint');if(obs&&op)op.textContent=obs.value||'';
 });
+window.addEventListener('afterprint',()=>document.body.classList.remove('pdf-resumido'));
+const pdfMode=document.getElementById('mostrarValoresPDF');
+if(pdfMode){pdfMode.value=localStorage.getItem('obrasdelite_pdf_valores')||'sim';pdfMode.addEventListener('change',()=>localStorage.setItem('obrasdelite_pdf_valores',pdfMode.value));}
 const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com',empresaTlm:'926573393'};
 ['alvara','empresaEmail','empresaTlm'].forEach(id=>{
   const el=document.getElementById(id);
