@@ -726,7 +726,14 @@ const COMPANY_DEFAULTS={alvara:'115318-PAR',empresaEmail:'geral@obrasdelite.com'
 document.getElementById('logoInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem('obrasdelite_logo',r.result);document.getElementById('logoImg').src=r.result};r.readAsDataURL(f)});
 const savedLogo=localStorage.getItem('obrasdelite_logo');if(savedLogo)document.getElementById('logoImg').src=savedLogo;
 document.getElementById('orcData').valueAsDate=new Date();document.getElementById('orcNumero').value=proximoNumero();addItem('Demolições / preparação',1,'vg',0);addItem('Mão de obra',1,'vg',0);renderHistorico();calc();
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
+if('serviceWorker' in navigator){
+  window.addEventListener('load',async()=>{
+    try{
+      const reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});
+      await reg.update();
+    }catch(e){console.warn('Service Worker:',e)}
+  });
+}
 </script>
 
 
